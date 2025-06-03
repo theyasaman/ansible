@@ -1,0 +1,7 @@
+myhosts:
+  hosts:
+    node-1:
+      ansible_host: 10.128.0.31
+    node-2: 
+      ansible_host: 10.128.0.42
+

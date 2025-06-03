@@ -1,0 +1,26 @@
+---
+- name: permanently enable https service, also enable it immediately if possible
+  hosts: myhosts
+  become: yes
+
+
+  tasks:
+  - name: enable https
+    ansible.posix.firewalld:
+      zone: public
+      service: https
+      state: enabled
+      permanent: true
+      immediate: true
+      offline: true
+  
+  - name: enable http
+    ansible.posix.firewalld:
+      zone: public
+      service: http
+      state: enabled
+      permanent: true
+      immediate: true
+      offline: true 
+
+

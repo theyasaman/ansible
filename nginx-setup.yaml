@@ -1,0 +1,28 @@
+---
+- name: install and confugure nginx to host static website.
+  hosts: myhosts
+  become: yes
+
+  tasks:
+    - name: install nginx
+      ansible.builtin.yum:
+        name: nginx
+        state: latest
+
+    - name: copy the static host content from the controler node
+      ansible.builtin.copy:
+        remote_src: false
+        src: static-site-config
+        dest: /etc/nginx/nginx.conf
+
+    - name: activate the nginx service
+      ansible.builtin.systemd:
+        state: started
+        name: nginx
+
+
+    - name: make sure that nginx is enabled
+      ansible.builtin.service:
+        name: nginx
+        enabled: true  
+
